@@ -16,6 +16,7 @@ class Seller
 public:
     string item;
     string time;
+    string email;
     int price;
     int condition;
     

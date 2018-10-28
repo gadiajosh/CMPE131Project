@@ -22,11 +22,11 @@ int main()
     cout << "Please provide your SJSU E-mail" << endl;
     cin >> email;
     
-    if (email.compare(6,5,"sjsu.edu") == 0)
+   /* if (email.compare(6,5,"sjsu.edu") == 0)
         cout << "still, " << email << " is an apple\n";
        // cout << "This a valid email. \n\n";
     //else
-      //  cout << "ERROR. This is not a valid email.\n\n";
+      //  cout << "ERROR. This is not a valid email.\n\n"; */ 
 
     
     do

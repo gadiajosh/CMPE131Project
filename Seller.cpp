@@ -25,7 +25,7 @@ SellerDB::SellerDB()
 
 void SellerDB::load(string list)
 {
-    string items, times, line;
+    string items, times, emails, line;
     int prices, conditions;
     ifstream fin;
     
@@ -58,12 +58,13 @@ void SellerDB::load(string list)
         getline(fin, line);
         if(line.empty()) break;
         
-        stringstream(line) >> items >> prices >> conditions >> times;
+        stringstream(line) >> items >> prices >> conditions >> emails >> times;
         
         // initialize database with file info
         dbPtr[size].item = items;
         dbPtr[size].price = prices;
         dbPtr[size].condition = conditions;
+        dbPtr[size].email = emails;
         dbPtr[size].time = asctime(ti);
         size++;
         
@@ -85,7 +86,7 @@ void SellerDB::load(string list)
 void SellerDB::display()
 {
     for (int i = 0; i < size; i++)
-        cout <<"Item Name:" << "\t" << dbPtr[i].item << "\n" "Price: " << "\t" << dbPtr[i].price << "\n" << "Condition: " << "\t" << dbPtr[i].condition << "/10" << endl << "Date Posed: " << dbPtr[i].time << "----------------------------------\n" << endl;
+        cout <<"Item Name:" << "\t" << dbPtr[i].item << "\n" "Price: " << "\t" << dbPtr[i].price << "\n" << "Condition: " << "\t" << dbPtr[i].condition << "/10" << endl << "Date Posed: " << dbPtr[i].time << endl << "Contact: " << "\t" << dbPtr[i].email << endl << "----------------------------------\n" << endl;
 
 }
 
@@ -153,7 +154,7 @@ void EmployeeDB::increaseSalary(int em)
 
 void SellerDB::add()
 {
-    string items, times;
+    string items, times, emails;
     int prices, conditions;
     
     cout << "Enter name of item: ";
@@ -162,6 +163,8 @@ void SellerDB::add()
     cin >> prices;
     cout << "Enter the condition of the item (out of ten): ";
     cin >> conditions;
+    cout << "Enter your email address: ";
+    cin >> emails;
     
     // Declaring argument for time()
     time_t tt;
@@ -185,6 +188,7 @@ void SellerDB::add()
     dbPtr[size].item = items;
     dbPtr[size].price = prices;
     dbPtr[size].condition = conditions;
+    dbPtr[size].email = emails;
     dbPtr[size].time = times;
     size++;
 
@@ -193,10 +197,10 @@ void SellerDB::add()
 void SellerDB::append()
 {
     ofstream fout;
-    fout.open("Seller.txt");
+    fout.open("SellerDB.txt");
     
     for (int i = 0; i < size; i++)
-        fout << dbPtr[i].item << '\t' << dbPtr[i].price << '\t' << dbPtr[i].condition << '\t' << dbPtr[i].time << '\n'  ;
+        fout << dbPtr[i].item << '\t' << dbPtr[i].price << '\t' << dbPtr[i].condition << '\t' << dbPtr[i].email << '\t' << dbPtr[i].time << '\n'  ;
     
     cout << "\n Item(s) posted.\n";
 }
